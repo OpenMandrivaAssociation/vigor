@@ -21,7 +21,7 @@ Requires:       tk
 BuildRequires:  libtermcap-devel
 BuildRequires:  tcl tcl-devel
 BuildRequires:  tk tk-devel
-BuildRequires:  XFree86-devel
+BuildRequires:  X11-devel
 BuildRoot:  %{_tmppath}/%{name}-%{version}
 
 %description
