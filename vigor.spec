@@ -22,6 +22,7 @@ BuildRequires:  libtermcap-devel
 BuildRequires:  tcl tcl-devel
 BuildRequires:  tk tk-devel
 BuildRequires:  X11-devel
+BuildRoot:  %{_tmppath}/%{name}-%{version}
 
 %description
 Based on the User Friendly comic strip storyline from 4 January to 14 January
