@@ -57,17 +57,6 @@ install -D -m 644 %{name}-32.png %{buildroot}%{_iconsdir}/%{name}.png
 install -D -m 644 %{name}-48.png %{buildroot}%{_liconsdir}/%{name}.png
 
 # menu entry
-install -d -m 755 %{buildroot}%{_menudir}/menu
-cat >%{buildroot}%{_menudir}/%{name} <<EOF
-?package(%{name}):\\
-    command="%{_bindir}/%{name}"\\
-    needs="text"\\
-    icon="%{name}.png"\\
-    section="More Applications/Editors"\\
-    title="%{title}" \
-    longtitle="%{longtitle}" \
-    xdg="true"
-EOF
 
 install -d -m 755 %{buildroot}%{_datadir}/applications
 cat >  %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -97,7 +86,6 @@ rm -rf %{buildroot}
 %doc FAQ LAYOUT LICENSE README README.vigor
 %{_bindir}/%{name}
 %{_datadir}/%{name}
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
