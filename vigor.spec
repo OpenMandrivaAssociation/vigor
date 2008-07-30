@@ -1,6 +1,6 @@
 %define name    vigor
 %define version 0.016
-%define release %mkrel 13
+%define release %mkrel 15
 
 %define title       Vigor
 %define longtitle   The popular Unix editor vi with the addition of the Vigor Assistant
