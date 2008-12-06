@@ -1,28 +1,22 @@
-%define name    vigor
-%define version 0.016
-%define release %mkrel 16
-
-%define title       Vigor
-%define longtitle   The popular Unix editor vi with the addition of the Vigor Assistant
-
-Name:       %{name}
-Version:    %{version}
-Release:    %{release}
-Summary:    The popular Unix editor vi with the addition of the Vigor Assistant
-License:    GPL
-Group:      Editors
-Url:        http://vigor.sourceforge.net/
-Source0:    http://heanet.dl.sourceforge.net/sourceforge/vigor/%{name}-%{version}.tar.bz2
-Source1:    %{name}-48.png.bz2
-Source2:    %{name}-32.png.bz2
-Source3:    %{name}-16.png.bz2
-Patch:      %{name}.tcltk83.patch.bz2
-Requires:       tk
-BuildRequires:  libtermcap-devel
-BuildRequires:  tcl tcl-devel
-BuildRequires:  tk tk-devel
-BuildRequires:  X11-devel
-BuildRoot:  %{_tmppath}/%{name}-%{version}
+Name:		vigor
+Version:	0.016
+Release:	%{mkrel 17}
+Summary:	The popular Unix editor vi with the addition of the Vigor Assistant
+License:	GPL
+Group:		Editors
+URL:		http://vigor.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+Source1:	%{name}-48.png.bz2
+Source2:	%{name}-32.png.bz2
+Source3:	%{name}-16.png.bz2
+Patch0:		%{name}.tcltk83.patch
+Patch1:		vigor-0.016-tcl86.patch
+Requires:	tk
+BuildRequires:	libtermcap-devel
+BuildRequires:	tcl-devel
+BuildRequires:	tk-devel
+BuildRequires:	X11-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Based on the User Friendly comic strip storyline from 4 January to 14 January
@@ -37,7 +31,8 @@ join us, watch the paperclip, don't be afraid...
 bzcat %{SOURCE1} > %{name}-16.png
 bzcat %{SOURCE2} > %{name}-32.png
 bzcat %{SOURCE3} > %{name}-48.png
-%patch
+%patch0
+%patch1 -p1 -b .tcl86
 
 %build
 cd build
@@ -62,8 +57,8 @@ install -d -m 755 %{buildroot}%{_datadir}/applications
 cat >  %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
-Name=%{title}
-Comment=%{longtitle}
+Name=vigor
+Comment=The popular Unix editor vi with the addition of the Vigor Assistant
 Exec=%{_bindir}/%{name}
 Icon=%{name}
 Terminal=true
