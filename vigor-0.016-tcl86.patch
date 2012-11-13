@@ -1,0 +1,82 @@
+--- vigor-0.016/ex/ex_tcl.c	2000-05-02 19:28:05.000000000 -0700
++++ vigor-0.016/ex/ex_tcl.c.new	2008-12-03 17:30:42.000000000 -0800
+@@ -71,7 +71,7 @@
+ 	    Tcl_Eval(gp->tcl_interp, cmdp->argv[0]->bp) == TCL_OK)
+ 		return (0);
+ 
+-	msgq(sp, M_ERR, "Tcl: %s", ((Tcl_Interp *)gp->tcl_interp)->result);
++	msgq(sp, M_ERR, "Tcl: %s", (Tcl_GetStringResult((Tcl_Interp *)gp->tcl_interp)));
+ 	return (1);
+ #else
+ 	msgq(sp, M_ERR, "302|Vi was not loaded with a Tcl interpreter");
+--- vigor-0.016/tcl_api/tcl.c	2000-05-02 19:27:50.000000000 -0700
++++ vigor-0.016/tcl_api/tcl.c.new	2008-12-03 17:31:15.000000000 -0800
+@@ -73,7 +73,7 @@
+ 	if (getscreenid(interp, &sp, NULL, argv[1]))
+ 		return (TCL_ERROR);
+ 
+-	(void)sprintf(interp->result, "%d", sp->id);
++	(void)sprintf(Tcl_GetStringResult(interp), "%d", sp->id);
+ 	return (TCL_OK);
+ }
+ 
+@@ -254,7 +254,7 @@
+ 	if (rval)
+ 		return (TCL_ERROR);
+ 
+-	(void)sprintf(interp->result, "%lu", (unsigned long)last);
++	(void)sprintf(Tcl_GetStringResult(interp), "%lu", (unsigned long)last);
+ 	return (TCL_OK);
+ }
+ 
+@@ -520,7 +520,7 @@
+ 	if (rval)
+ 		return (TCL_ERROR);
+ 
+-	(void)sprintf(interp->result, "%d", nsp->id);
++	(void)sprintf(Tcl_GetStringResult(interp), "%d", nsp->id);
+ 	return (TCL_OK);
+ }
+ 
+--- vigor-0.016/tk/tk_main.c	2000-05-02 19:27:50.000000000 -0700
++++ vigor-0.016/tk/tk_main.c.new	2008-12-03 17:32:07.000000000 -0800
+@@ -306,8 +306,8 @@
+ tcl_err(tkp)
+ 	TK_PRIVATE *tkp;
+ {
+-	(void)fprintf(stderr, "%s\n", tkp->interp->result != NULL ?
+-	    tkp->interp->result : "Tcl/Tk: initialization error");
++	(void)fprintf(stderr, "%s\n", tkp->Tcl_GetStringResult(interp) != NULL ?
++	    tkp->Tcl_GetStringResult(interp) : "Tcl/Tk: initialization error");
+ 	(void)tk_usage();
+ 	exit (1);
+ }
+--- vigor-0.016/vigor/vigor.c	2000-05-02 19:29:36.000000000 -0700
++++ vigor-0.016/vigor/vigor.c.new	2008-12-03 17:32:28.000000000 -0800
+@@ -78,7 +78,7 @@
+ 	 * to want tk's main window cluttering up the place.  I should
+ 	 * use a wm_withdraw instead. */
+ 	if (Tk_Init(vigor_interp) == TCL_ERROR) {
+-		fprintf(stderr, "%s\n", vigor_interp->result);		
++		fprintf(stderr, "%s\n", Tcl_GetStringResult(vigor_interp));		
+ 		return (1);
+ 	}
+ 
+@@ -87,7 +87,7 @@
+ 		return (1);
+ #endif
+ 	if (Tcl_Eval(vigor_interp, vigor_tcl) == TCL_ERROR) {
+-		fprintf(stderr, "%s\n", vigor_interp->result);
++		fprintf(stderr, "%s\n", Tcl_GetStringResult(vigor_interp));
+ 		return (1);
+ 	}
+ 
+@@ -127,7 +127,7 @@
+ 	init_vigor_phrases();
+ 
+ 	if (Tcl_Eval(vigor_interp, "vigor_init") == TCL_ERROR) {
+-		fprintf(stderr, "%s\n", vigor_interp->result);
++		fprintf(stderr, "%s\n", Tcl_GetStringResult(vigor_interp));
+ 	        return (1);
+ 	}
+ 
