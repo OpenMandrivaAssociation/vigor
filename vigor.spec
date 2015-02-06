@@ -1,6 +1,6 @@
 Name:		vigor
 Version:	0.016
-Release:	20
+Release:	21
 Summary:	The popular Unix editor vi with the addition of the Vigor Assistant
 License:	GPL
 Group:		Editors
