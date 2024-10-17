@@ -4,7 +4,7 @@ Release:	21
 Summary:	The popular Unix editor vi with the addition of the Vigor Assistant
 License:	GPL
 Group:		Editors
-URL:		http://vigor.sourceforge.net/
+URL:		https://vigor.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}-48.png
 Source2:	%{name}-32.png
