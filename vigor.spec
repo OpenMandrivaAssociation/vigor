@@ -12,6 +12,11 @@ Source3:	%{name}-16.png
 Patch0:		%{name}.tcltk83.patch
 Patch1:		vigor-0.016-tcl86.patch
 Requires:	tk
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	termcap-devel
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
